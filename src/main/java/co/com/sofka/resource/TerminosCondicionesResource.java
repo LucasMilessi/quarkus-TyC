@@ -2,15 +2,12 @@ package co.com.sofka.resource;
 
 import co.com.sofka.model.TerminosCondiciones;
 import co.com.sofka.model.TerminosCondicionesAceptacion;
-import co.com.sofka.repository.TerminosCondicionesAceptacionRepository;
-import co.com.sofka.repository.TerminosCondicionesRepository;
 import co.com.sofka.service.TerminoCondicionesService;
 import co.com.sofka.service.TerminosCondicionesAceptacionService;
 import io.smallrye.mutiny.Uni;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -42,7 +39,7 @@ public class TerminosCondicionesResource {
     }
 
     @POST
-    @Path("/agree")
+    @Path("/crearAcept")
     @Produces(APPLICATION_JSON)
     public Uni<Response> crearAcepTyC(TerminosCondicionesAceptacion terminosCondicionesAceptacion) {
         if(terminosCondicionesAceptacion.getTipoDocumento().equals("Cedula")||
