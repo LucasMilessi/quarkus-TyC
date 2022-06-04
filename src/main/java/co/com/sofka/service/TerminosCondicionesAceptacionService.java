@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Produces
 @ApplicationScoped
 public class TerminosCondicionesAceptacionService {
     @Inject

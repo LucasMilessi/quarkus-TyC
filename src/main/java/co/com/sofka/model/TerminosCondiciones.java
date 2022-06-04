@@ -1,6 +1,7 @@
 package co.com.sofka.model;
 
 import io.quarkus.mongodb.panache.common.MongoEntity;
+import io.smallrye.common.constraint.NotNull;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 public class TerminosCondiciones {
 
     private ObjectId _id;
+    @NotNull
     private String descripcion;
     private Integer version;
     private LocalDate fechaDeCreacion;
@@ -16,10 +18,10 @@ public class TerminosCondiciones {
     public TerminosCondiciones() {
     }
 
-    public TerminosCondiciones(String descripcion, Integer version, LocalDate fechaDeCreacion) {
+    public TerminosCondiciones(String descripcion, Integer version) {
         this.descripcion = descripcion;
         this.version = version;
-        this.fechaDeCreacion = fechaDeCreacion;
+        this.fechaDeCreacion = LocalDate.now();
     }
 
     public ObjectId get_id() {

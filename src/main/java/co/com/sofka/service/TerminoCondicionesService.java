@@ -6,10 +6,7 @@ import io.smallrye.mutiny.Uni;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Produces;
-import java.time.LocalDate;
 
-@Produces
 @ApplicationScoped
 public class TerminoCondicionesService {
 
@@ -17,12 +14,12 @@ public class TerminoCondicionesService {
     TerminosCondicionesRepository terminosCondicionesRepository;
 
     public Uni<TerminosCondiciones> agregarTerminoCondicion(TerminosCondiciones terminosCondiciones){
-        Integer cantidad = Integer.parseInt(terminosCondicionesRepository.findAll().count().toString());
 
-                Uni<TerminosCondiciones> tyc = (Uni<TerminosCondiciones>) new TerminosCondiciones(
-                        terminosCondiciones.getDescripcion(),
-                        cantidad + 1, LocalDate.now());
-        return tyc;
+        return terminosCondicionesRepository.findAllTerms().map(tyc ->
+                new TerminosCondiciones(terminosCondiciones.getDescripcion(), tyc +1))
+                .flatMap(terminosCondicionesRepository::persist);
+
+
     }
 
     public Uni<TerminosCondiciones> ultimoTyC(){

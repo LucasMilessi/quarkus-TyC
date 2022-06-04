@@ -25,6 +25,7 @@ public class TerminosCondicionesResource {
     TerminosCondicionesAceptacionService terminosCondicionesAceptacionService;
 
     @POST
+    @Produces(APPLICATION_JSON)
     public Uni<Response> crearTyC(TerminosCondiciones terminosCondiciones) {
         return terminoCondicionesService.agregarTerminoCondicion(terminosCondiciones)
                 .map(termsConditions ->Response.ok(termsConditions).build());
@@ -40,7 +41,7 @@ public class TerminosCondicionesResource {
 
     @POST
     @Path("/crearAcept")
-    @Produces(APPLICATION_JSON)
+    @Consumes(APPLICATION_JSON)
     public Uni<Response> crearAcepTyC(TerminosCondicionesAceptacion terminosCondicionesAceptacion) {
         if(terminosCondicionesAceptacion.getTipoDocumento().equals("Cedula")||
                 terminosCondicionesAceptacion.getTipoDocumento().equals("Pasaporte")){
