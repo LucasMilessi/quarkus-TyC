@@ -37,7 +37,7 @@ public class TerminosCondicionesAceptacionService {
     }
 
     public Uni<Object> agregarDocumentoCI(TerminosCondicionesAceptacion terminosCondicionesAceptacion){
-        Pattern patron = Pattern.compile("[0-9]{2}-PN{2}-[0-9]{2}-[0-9]{4}");
+        Pattern patron = Pattern.compile("[0-9]{2}-PN-[0-9]{3}-[0-9]{4}");
         Matcher matcher = patron.matcher(terminosCondicionesAceptacion.getDocumento());
         Boolean validar = matcher.matches();
 

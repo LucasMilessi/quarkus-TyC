@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @MongoEntity(collection = "termYcond")
 public class TerminosCondiciones {
 
-    private ObjectId _id;
+    public ObjectId id;
     @NotNull
     private String descripcion;
     private Integer version;
@@ -22,14 +22,6 @@ public class TerminosCondiciones {
         this.descripcion = descripcion;
         this.version = version;
         this.fechaDeCreacion = LocalDate.now();
-    }
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
     }
 
     public String getDescripcion() {

@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.Response.Status.CREATED;
 import static javax.ws.rs.core.Response.Status.NOT_ACCEPTABLE;
 
 @Path("/api/termYcond")
@@ -49,7 +50,7 @@ public class TerminosCondicionesResource {
             return terminosCondicionesAceptacionService.agregarTyCaceptacion(terminosCondicionesAceptacion)
                     .map(acepTerm -> Response.ok(acepTerm).build())
                     .onFailure().
-                    recoverWithItem(() -> Response.status(NOT_ACCEPTABLE).build());
+                    recoverWithItem(() -> Response.status(CREATED).build());
         }
         return Uni.createFrom().item(Response.status(NOT_ACCEPTABLE).build());
     }

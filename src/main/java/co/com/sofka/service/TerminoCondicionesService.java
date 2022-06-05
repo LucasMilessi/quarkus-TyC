@@ -16,7 +16,7 @@ public class TerminoCondicionesService {
     public Uni<TerminosCondiciones> agregarTerminoCondicion(TerminosCondiciones terminosCondiciones){
 
         return terminosCondicionesRepository.findAllTerms().map(tyc ->
-                new TerminosCondiciones(terminosCondiciones.getDescripcion(), tyc +1))
+                new TerminosCondiciones(terminosCondiciones.getDescripcion(), tyc.intValue() +1))
                 .flatMap(terminosCondicionesRepository::persist);
 
 
