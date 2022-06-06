@@ -14,6 +14,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.Response.Status.CREATED;
 import static javax.ws.rs.core.Response.Status.NOT_ACCEPTABLE;
 
+
 @Path("/api/termYcond")
 @Consumes(APPLICATION_JSON)
 @Produces(APPLICATION_JSON)

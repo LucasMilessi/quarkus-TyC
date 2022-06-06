@@ -47,7 +47,7 @@ public class TerminosCondicionesAceptacionService {
                     .flatMap(terminosCondicionesAceptacionRepository::persist)
                     .map(termCI -> "Se acepto el termino y condición para el documento "+terminosCondicionesAceptacion.getDocumento());
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("El formato de CI ingresado es incorrecto");
     }
     public Uni<Object> agregarDocumentoPas(TerminosCondicionesAceptacion terminosCondicionesAceptacion){
         Pattern patron = Pattern.compile("[a-zA-Z0-9-]{5,16}");
@@ -60,6 +60,6 @@ public class TerminosCondicionesAceptacionService {
                     .flatMap(terminosCondicionesAceptacionRepository::persist)
                     .map(termPas -> "Se acepto el termino y condición para el documento "+terminosCondicionesAceptacion.getDocumento());
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("El formato de pasaporte ingresado es incorrecto");
     }
 }

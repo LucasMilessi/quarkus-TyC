@@ -14,11 +14,11 @@ public class TerminosCondicionesAceptacion {
     private Integer versionTC;
     private LocalDate fechaDeAceptacion;
 
-    public TerminosCondicionesAceptacion(String tipoDocumento, String documento, Integer versionTC, LocalDate fechaDeAceptacion) {
+    public TerminosCondicionesAceptacion(String tipoDocumento, String documento, Integer versionTC) {
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
         this.versionTC = versionTC;
-        this.fechaDeAceptacion = fechaDeAceptacion;
+        this.fechaDeAceptacion = LocalDate.now();
     }
 
     public String getTipoDocumento() {
