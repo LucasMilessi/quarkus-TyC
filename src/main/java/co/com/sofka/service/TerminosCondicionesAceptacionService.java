@@ -5,8 +5,6 @@ import co.com.sofka.repository.TerminosCondicionesAceptacionRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Produces;
-
 
 import io.smallrye.mutiny.Uni;
 import org.slf4j.Logger;

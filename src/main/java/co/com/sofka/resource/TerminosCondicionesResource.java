@@ -41,6 +41,14 @@ public class TerminosCondicionesResource {
                 .map(termsConditions -> Response.ok(termsConditions).build());
     }
 
+    @GET
+    @Path("/mostrarTyC/{version}")
+    @Produces(APPLICATION_JSON)
+    public Uni<Response> mostrarTyCversion(Integer version){
+        return terminoCondicionesService.mostrarVersion(version)
+                .map(termsConditions -> Response.ok(termsConditions).build());
+    }
+
     @POST
     @Path("/crearAcept")
     @Consumes(APPLICATION_JSON)

@@ -2,10 +2,16 @@ package co.com.sofka.model;
 
 import io.quarkus.mongodb.panache.common.MongoEntity;
 import io.smallrye.common.constraint.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 @MongoEntity(collection = "termYcond")
 public class TerminosCondiciones {
 
@@ -14,15 +20,6 @@ public class TerminosCondiciones {
     private String descripcion;
     private Integer version;
     private LocalDate fechaDeCreacion;
-
-    public TerminosCondiciones() {
-    }
-
-    public TerminosCondiciones(String descripcion, Integer version) {
-        this.descripcion = descripcion;
-        this.version = version;
-        this.fechaDeCreacion = LocalDate.now();
-    }
 
     public String getDescripcion() {
         return descripcion;

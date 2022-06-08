@@ -1,10 +1,16 @@
 package co.com.sofka.model;
 
 import io.quarkus.mongodb.panache.common.MongoEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 @MongoEntity(collection = "termYcondAceptacion")
 public class TerminosCondicionesAceptacion {
 
@@ -13,13 +19,6 @@ public class TerminosCondicionesAceptacion {
     private String documento;
     private Integer versionTC;
     private LocalDate fechaDeAceptacion;
-
-    public TerminosCondicionesAceptacion(String tipoDocumento, String documento, Integer versionTC) {
-        this.tipoDocumento = tipoDocumento;
-        this.documento = documento;
-        this.versionTC = versionTC;
-        this.fechaDeAceptacion = LocalDate.now();
-    }
 
     public String getTipoDocumento() {
         return tipoDocumento;

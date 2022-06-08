@@ -14,4 +14,8 @@ public class TerminosCondicionesRepository implements ReactivePanacheMongoReposi
         return  findAll().count().onItem().transform(size->size.intValue());
     }
 
+    public Uni<TerminosCondiciones> findByVersion(Integer version){
+        return find("version", version).firstResult();
+    }
+
 }
