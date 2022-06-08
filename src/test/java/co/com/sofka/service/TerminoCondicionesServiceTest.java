@@ -52,28 +52,24 @@ class TerminoCondicionesServiceTest {
     @Test
     void agregarTerminoCondicionTest() {
 
-        TerminosCondiciones tyc2 = TerminosCondiciones.builder()
-                .descripcion(descripcion)
-                .version(version)
-                .fechaDeCreacion(fecha)
-                .build();
-
         Mockito.when(terminosCondicionesRepository.findAllTerms()).thenReturn(Uni.createFrom().item(1));
         Mockito.when(terminosCondicionesRepository.persist(tyc)).thenReturn(Uni.createFrom().item(tyc));
 
-        terminoCondicionesService.agregarTerminoCondicion(tyc2).subscribe().with(termYcond -> {
-            Assertions.assertEquals("descripcion", termYcond.getDescripcion());
+        terminoCondicionesService.agregarTerminoCondicion(tyc).subscribe().with(termYcond -> {
+            assertEquals("62a0c1034a8d71536568fdf4", termYcond.id);
+            assertEquals("descripcion", termYcond.getDescripcion());
+            assertEquals(1, termYcond.getVersion());
+            assertEquals(fecha, termYcond.getFechaDeCreacion());
         });
     }
 
     @Test
     void mostrarVersion() {
-        ObjectId objectId1 = new ObjectId("2");
 
-        List<TerminosCondiciones> listTyC = new ArrayList<>();
-        listTyC.add(new TerminosCondiciones(objectId, descripcion, version, fecha));
-        listTyC.add(new TerminosCondiciones(objectId1, "descripcion2",2,fecha));
+        Mockito.when(terminosCondicionesRepository.findByVersion(version)).thenReturn(Uni.createFrom().item(tyc));
 
+        terminoCondicionesService.mostrarVersion(version).subscribe().with(version ->
+                assertEquals(version, version.getVersion()));
 
     }
 
@@ -81,15 +77,17 @@ class TerminoCondicionesServiceTest {
     void ultimoTyC() {
 
         ObjectId objectId1 = new ObjectId("62a0c1034a8d71536568fdf5");
+        String desc = "Termino y condicion";
+        Integer ver = 2;
 
         List<TerminosCondiciones> listTyC = new ArrayList<>();
         listTyC.add(new TerminosCondiciones(objectId, descripcion, version, fecha));
-        listTyC.add(new TerminosCondiciones(objectId1, "descripcion2",2,fecha));
+        listTyC.add(new TerminosCondiciones(objectId1,desc,ver,fecha));
 
-        Mockito.when(terminosCondicionesRepository.findAll().list()).thenReturn(Uni.createFrom().item(listTyC));
+
+        Mockito.when(terminosCondicionesRepository.listAll()).thenReturn(Uni.createFrom().item(listTyC));
 
         terminoCondicionesService.ultimoTyC().subscribe().with(ultVer ->
-                Assertions.assertEquals(2, ultVer.getVersion()));
-
+                assertEquals(2, ultVer.getVersion()));
     }
 }

@@ -22,9 +22,9 @@ public class TerminoCondicionesService {
                 .flatMap(terminosCondicionesRepository::persist);
     }
 
-        private TerminosCondiciones contructor(String descripcion, Integer version, LocalDate fecha){
+    private TerminosCondiciones contructor(String descripcion, Integer version, LocalDate fecha){
 
-            fecha = LocalDate.now();
+        fecha = LocalDate.now();
 
         return TerminosCondiciones.builder()
                 .descripcion(descripcion)
