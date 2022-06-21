@@ -2,19 +2,16 @@ package co.com.sofka.service;
 
 import co.com.sofka.model.TerminosCondiciones;
 import co.com.sofka.repository.TerminosCondicionesRepository;
-import io.quarkus.test.Mock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import io.smallrye.mutiny.Uni;
 import org.bson.types.ObjectId;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +31,7 @@ class TerminoCondicionesServiceTest {
     private final ObjectId objectId = new ObjectId("62a0c1034a8d71536568fdf4");
     private final String descripcion = "descripcion";
     private final Integer version = 1;
-    private final LocalDate fecha = LocalDate.now();
+    private final Instant fecha = ZonedDateTime.now().toInstant();
 
 
     @BeforeEach

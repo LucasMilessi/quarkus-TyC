@@ -6,7 +6,7 @@ import io.smallrye.mutiny.Uni;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.time.LocalDate;
+import java.time.*;
 
 @ApplicationScoped
 public class TerminoCondicionesService {
@@ -14,17 +14,18 @@ public class TerminoCondicionesService {
     @Inject
     TerminosCondicionesRepository terminosCondicionesRepository;
 
-    public Uni<TerminosCondiciones> agregarTerminoCondicion(TerminosCondiciones terminosCondiciones){
+    public Uni<? extends TerminosCondiciones> agregarTerminoCondicion(TerminosCondiciones terminosCondiciones){
 
-        return terminosCondicionesRepository.findAllTerms().map(tyc -> contructor(terminosCondiciones.getDescripcion(),
+        return terminosCondicionesRepository.findAllTerms()
+                .map(tyc -> contructor(terminosCondiciones.getDescripcion(),
                         tyc.intValue() + 1,
                         terminosCondiciones.getFechaDeCreacion()))
                 .flatMap(terminosCondicionesRepository::persist);
     }
 
-    private TerminosCondiciones contructor(String descripcion, Integer version, LocalDate fecha){
+    private TerminosCondiciones contructor(String descripcion, Integer version, Instant fecha){
 
-        fecha = LocalDate.now();
+        fecha = ZonedDateTime.now().toInstant();
 
         return TerminosCondiciones.builder()
                 .descripcion(descripcion)

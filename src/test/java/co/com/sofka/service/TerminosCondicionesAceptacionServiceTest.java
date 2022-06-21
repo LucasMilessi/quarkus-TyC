@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
+import java.time.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,7 +35,7 @@ class TerminosCondicionesAceptacionServiceTest {
 
     private final Integer versionTC = 3;
 
-    private final LocalDate fechaAceptacion = LocalDate.now();
+    private final Instant fecha = ZonedDateTime.now().toInstant();
 
     @BeforeEach
     void setUp(){
@@ -45,14 +45,14 @@ class TerminosCondicionesAceptacionServiceTest {
                 .tipoDocumento(tipoDocumentoC)
                 .documento(documentoC)
                 .versionTC(versionTC)
-                .fechaDeAceptacion(fechaAceptacion)
+                .fechaDeAceptacion(fecha)
                 .build();
 
         tycAceptP = TerminosCondicionesAceptacion.builder()
                 .tipoDocumento(tipoDocumentoP)
                 .documento(documentoP)
                 .versionTC(versionTC)
-                .fechaDeAceptacion(fechaAceptacion)
+                .fechaDeAceptacion(fecha)
                 .build();
 
     }

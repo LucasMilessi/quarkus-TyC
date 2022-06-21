@@ -5,12 +5,13 @@ import co.com.sofka.repository.TerminosCondicionesAceptacionRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 import io.smallrye.mutiny.Uni;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,18 +21,27 @@ public class TerminosCondicionesAceptacionService {
     TerminosCondicionesAceptacionRepository terminosCondicionesAceptacionRepository;
 
     private final Logger log = LoggerFactory.getLogger(TerminosCondicionesAceptacionService.class);
+    Instant fecha = ZonedDateTime.now().toInstant();
+
 
     public Uni<Object> agregarTyCaceptacion(TerminosCondicionesAceptacion terminosCondicionesAceptacion){
 
+        if(terminosCondicionesAceptacion.getTipoDocumento().equals("Cedula")||
+                terminosCondicionesAceptacion.getTipoDocumento().equals("Pasaporte")){
+
         return Uni.createFrom().item(terminosCondicionesAceptacion)
-                .flatMap(aceptTyC->{
-                    aceptTyC.setFechaDeAceptacion(LocalDate.now());
+                .flatMap(aceptTyC -> {
+                    aceptTyC.setFechaDeAceptacion(fecha);
                     if (aceptTyC.getTipoDocumento().equals("Pasaporte")){
-                        aceptTyC.setFechaDeAceptacion(LocalDate.now());
+                        aceptTyC.setFechaDeAceptacion(fecha);
                         return agregarDocumentoPas(aceptTyC);
                     }
                     return agregarDocumentoCI(aceptTyC);
                 });
+        }
+        return Uni.createFrom()
+                .nullItem()
+                .map(fail -> "El tipo de documento ingresado no existe");
     }
 
     public Uni<Object> agregarDocumentoCI(TerminosCondicionesAceptacion terminosCondicionesAceptacion){
@@ -45,7 +55,10 @@ public class TerminosCondicionesAceptacionService {
                     .flatMap(terminosCondicionesAceptacionRepository::persist)
                     .map(termCI -> "Se acepto el termino y condición para el documento "+terminosCondicionesAceptacion.getDocumento());
         }
-        throw new IllegalArgumentException("El formato de CI ingresado es incorrecto");
+        //throw new RuntimeException("El formato de pasaporte ingresado es incorrecto");
+        return Uni.createFrom()
+                .nullItem()
+                .map(fail -> "El formato de la cédula ingresada es incorrecta");
     }
     public Uni<Object> agregarDocumentoPas(TerminosCondicionesAceptacion terminosCondicionesAceptacion){
         Pattern patron = Pattern.compile("[a-zA-Z0-9-]{5,16}");
@@ -58,6 +71,9 @@ public class TerminosCondicionesAceptacionService {
                     .flatMap(terminosCondicionesAceptacionRepository::persist)
                     .map(termPas -> "Se acepto el termino y condición para el documento "+terminosCondicionesAceptacion.getDocumento());
         }
-        throw new IllegalArgumentException("El formato de pasaporte ingresado es incorrecto");
+
+        return Uni.createFrom()
+                .nullItem()
+                .map(fail -> "El formato de pasaporte ingresado es incorrecto");
     }
 }

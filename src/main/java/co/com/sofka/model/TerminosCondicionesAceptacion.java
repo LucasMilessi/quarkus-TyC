@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
-import java.time.LocalDate;
+import java.time.Instant;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +19,7 @@ public class TerminosCondicionesAceptacion {
     private String tipoDocumento;
     private String documento;
     private Integer versionTC;
-    private LocalDate fechaDeAceptacion;
+    private Instant fechaDeAceptacion;
 
     public String getTipoDocumento() {
         return tipoDocumento;
@@ -44,11 +45,11 @@ public class TerminosCondicionesAceptacion {
         this.versionTC = versionTC;
     }
 
-    public LocalDate getFechaDeAceptacion() {
+    public Instant getFechaDeAceptacion() {
         return fechaDeAceptacion;
     }
 
-    public void setFechaDeAceptacion(LocalDate fechaDeAceptacion) {
+    public void setFechaDeAceptacion(Instant fechaDeAceptacion) {
         this.fechaDeAceptacion = fechaDeAceptacion;
     }
 }

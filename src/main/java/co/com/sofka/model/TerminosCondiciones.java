@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +19,8 @@ public class TerminosCondiciones {
     @NotNull
     private String descripcion;
     private Integer version;
-    private LocalDate fechaDeCreacion;
+
+    private Instant fechaDeCreacion;
 
     public String getDescripcion() {
         return descripcion;
@@ -37,11 +38,11 @@ public class TerminosCondiciones {
         this.version = version;
     }
 
-    public LocalDate getFechaDeCreacion() {
+    public Instant getFechaDeCreacion() {
         return fechaDeCreacion;
     }
 
-    public void setFechaDeCreacion(LocalDate fechaDeCreacion) {
+    public void setFechaDeCreacion(Instant fechaDeCreacion) {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 }
